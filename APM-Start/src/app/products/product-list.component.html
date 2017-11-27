@@ -1,0 +1,54 @@
+<div class='card'>
+        <h4 class='float-left'> Filter By: </h4>
+        <input type='text' [(ngModel)]='listFilter'/>
+</div>
+<div class='table-responsive'>
+    <table class='table' *ngIf='products'>
+        <thead>
+            <tr>
+                <th>
+                    <button class='btn btn-primary' (click)='toggleImage()'>
+                        {{this.buttonText}}
+                    </button>
+                </th>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Code    
+                </th>
+                <th>
+                    Available
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    5 Star Rating
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let p of products'>
+                <td>
+                    <img src={{p.imageUrl}} title={{p.productName | uppercase }} width={{imageWidth}} *ngIf='showImage'>
+                </td>
+                <td>
+                    {{p.productName}}
+                </td>
+                <td>
+                    {{p.productCode }}
+                </td>
+                <td>
+                    {{p.releaseDate}}
+                </td>
+                <td>
+                    {{p.price | currency:'USD':true:'1.2-1'}}
+                </td>
+                <td>
+                    {{p.starRating}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
