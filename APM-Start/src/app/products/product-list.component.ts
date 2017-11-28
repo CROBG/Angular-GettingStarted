@@ -1,7 +1,7 @@
 import { IProduct } from './product';
 import { Component, OnInit } from '@angular/core';
-import { ProductHelpers } from '../helpers/product.helpers';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ProductService } from './product.service';
 
 @Component({
     selector: 'pm-products',
@@ -15,10 +15,10 @@ export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
-    products: IProduct[];
     filteredProducts: IProduct[];
 
     private _listFilter: string;
+    private products: IProduct[];
 
     get listFilter(): string {
         return this._listFilter;
@@ -28,12 +28,16 @@ export class ProductListComponent implements OnInit {
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
     }
  
-    constructor() {
-        this.products = ProductHelpers.generateProductTestList();
+    constructor( private _productService: ProductService ) {
+    }
+
+    loadProducts() {
+        this.products = this._productService.getProducts();
+        this.filteredProducts = this.products;
     }
 
     ngOnInit() {
-        this.filteredProducts = this.products;
+        this.loadProducts();
     }
 
     onRatingClicked(message: string) {

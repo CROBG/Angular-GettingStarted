@@ -1,8 +1,10 @@
-import { IProduct } from '../products/product';
+import { Injectable } from '@angular/core';
+import { IProduct } from './product';
 
-export class ProductHelpers {
+@Injectable()
+export class ProductService {
     
-    static generateProductTestList() : IProduct[] {
+    getProducts(): IProduct[] {
         return [
             {
                 'productId': 1,
