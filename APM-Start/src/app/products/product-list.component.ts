@@ -32,8 +32,12 @@ export class ProductListComponent implements OnInit {
         this.products = ProductHelpers.generateProductTestList();
     }
 
-    ngOnInit () {
+    ngOnInit() {
         this.filteredProducts = this.products;
+    }
+
+    onRatingClicked(message: string) {
+        this.pageTitle = 'Product List: ' + message;
     }
 
     performFilter(filter: string): IProduct[] {
