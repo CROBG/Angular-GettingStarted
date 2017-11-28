@@ -1,13 +1,13 @@
 <div class='card'>
         <h4 class='float-left'> Filter By: </h4>
-        <input type='text' [(ngModel)]='listFilter'/>
+        <input type='text' [(ngModel)]='this.listFilter'/>
 </div>
 <div class='table-responsive'>
     <table class='table' *ngIf='products'>
         <thead>
             <tr>
                 <th>
-                    <button class='btn btn-primary' (click)='toggleImage()'>
+                    <button class='btn btn-primary' (click)='this.toggleImage()'>
                         {{this.buttonText}}
                     </button>
                 </th>
@@ -29,21 +29,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor='let p of products'>
+            <tr *ngFor='let p of filteredProducts'>
                 <td>
-                    <img src={{p.imageUrl}} title={{p.productName | uppercase }} width={{imageWidth}} *ngIf='showImage'>
+                    <img src={{p.imageUrl}} width={{this.imageWidth}} *ngIf='this.showImage'>
                 </td>
                 <td>
                     {{p.productName}}
                 </td>
                 <td>
-                    {{p.productCode }}
+                    {{p.productCode | uppercase | convertToSpaces:'-' }}
                 </td>
                 <td>
                     {{p.releaseDate}}
                 </td>
                 <td>
-                    {{p.price | currency:'USD':true:'1.2-1'}}
+                    {{p.price | currency:'USD':true:0}}
                 </td>
                 <td>
                     {{p.starRating}}
