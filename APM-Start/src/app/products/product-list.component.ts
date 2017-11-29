@@ -9,8 +9,8 @@ import { ProductService } from './product.service';
 })
 export class ProductListComponent implements OnInit {
 
-    showImage: boolean = false;
-    buttonText: string = 'Show Image';
+    showImage: boolean = true;
+    buttonText: string = 'Hide Image';
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
@@ -32,7 +32,7 @@ export class ProductListComponent implements OnInit {
     }
 
     loadProducts() {
-        this._productService.getProducts()
+        this._productService.getProductsObservable()
         .subscribe(
             products => {
                 this.products = products;

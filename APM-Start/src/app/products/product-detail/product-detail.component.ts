@@ -13,16 +13,20 @@ export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Detail';
   product: IProduct;
 
-  constructor( 
+  constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _service: ProductService ) { 
+    private _service: ProductService ) {
   }
 
   ngOnInit() {
-    let id = +this._route.snapshot.paramMap.get('id');
+    const id = +this._route.snapshot.paramMap.get('id');
     this.pageTitle += `: ${id}`;
-    this.product = this._service.getProductFromId(id);
+    this._service.getProductsPromise().then(
+      products => {
+         this.product = products.find( p => p.productId === id);
+      }
+    );
   }
 
   onBack() {
