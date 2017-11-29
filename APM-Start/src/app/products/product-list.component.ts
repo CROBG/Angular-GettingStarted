@@ -27,13 +27,13 @@ export class ProductListComponent implements OnInit {
         this._listFilter = value;
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
     }
- 
+
     constructor( private _productService: ProductService ) {
     }
 
     loadProducts() {
         this._productService.getProducts()
-        .subscribe( 
+        .subscribe(
             products => {
                 this.products = products;
                 this.filteredProducts = this.products;

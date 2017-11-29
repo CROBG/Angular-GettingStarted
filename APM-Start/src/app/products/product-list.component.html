@@ -41,7 +41,7 @@
                             <img src={{p.imageUrl}} width={{this.imageWidth}} *ngIf='this.showImage'>
                         </td>
                         <td>
-                            {{p.productName}}
+                            <a [routerLink]="['/products', p.productId]">{{p.productName}}</a>
                         </td>
                         <td>
                             {{p.productCode | uppercase | convertToSpaces:'-' }}
